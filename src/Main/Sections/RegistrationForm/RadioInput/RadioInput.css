@@ -1,0 +1,13 @@
+.radio-input {
+    display: flex;
+    gap: 7px;
+    flex-direction: column;
+    margin: 25px 0 47px 0;
+}
+
+.radio-input h4 {
+    font-weight: 400;
+    line-height: 26px;
+    font-size: 16px;
+    margin-bottom: 4px;
+}

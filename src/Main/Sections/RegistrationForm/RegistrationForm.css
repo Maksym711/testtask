@@ -1,0 +1,39 @@
+.registration-form {
+    width: 1170px;
+    margin: 0 auto 100px auto;
+}
+
+.registration-form h1 {
+    text-align: center;
+    line-height: 40px;
+    font-size: 40px;
+    opacity: 0.87;
+    color: #000000;
+}
+
+.registration-form form {
+    width: 380px;
+    margin: 50px auto;
+}
+
+.inputs-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+/* .radio-block {
+    display: flex;
+    gap: 7px;
+    flex-direction: column;
+    margin: 25px 0 47px 0;
+}
+
+.radio-block h4 {
+    font-weight: 400;
+    line-height: 26px;
+    font-size: 16px;
+    margin-bottom: 4px;
+} */
+

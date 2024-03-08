@@ -1,0 +1,26 @@
+.card {
+    width: 370px;
+    height: 254px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: 20px;
+}
+
+.card img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.card p {
+    line-height: 26px;
+    font-size: 16px;
+    color: #000000;
+    opacity: 0.87;
+}
+
+.name {
+    margin: 20px 0;
+}
+

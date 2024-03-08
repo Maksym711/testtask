@@ -1,0 +1,21 @@
+.user-cards {
+    width: 1170px;
+    margin: 140px auto;
+    text-align: center;
+}
+
+.user-cards h1 {
+    line-height: 40px;
+    font-size: 40px;
+    text-align: center;
+    opacity: 0.87;
+    color: #000000;
+}
+
+.content-user-cards {
+    margin: 50px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 370px);
+    grid-auto-rows: 254px;
+    grid-gap: 29px;
+}
