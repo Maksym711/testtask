@@ -62,7 +62,7 @@
     top: -7px;
     left: 11px;
     padding: 0 5px;
-    background: #f8f8f8;
+    opacity: 1;
 }
 
 .label.error {

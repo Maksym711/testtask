@@ -25,6 +25,14 @@ label {
     margin-right: 12px;
 }
 
+.custom-radio:hover {
+    border: 1px solid #7E7E7E;
+}
+
+.custom-radio.error {
+    border: 2px solid #CB3D40;
+}
+
 .custom-radio::before {
     content: '';
     display: inline-block;

@@ -4,7 +4,7 @@ import './Radio.css'
 export default function Radio(props) {
 
     const handleRadioChange = (e) => {
-        props.onChange(e.target.value)
+        props.setSelectedPosition(e.target.value)
     }
 
     return (
@@ -16,7 +16,7 @@ export default function Radio(props) {
             className='real-radio' 
             onChange={handleRadioChange}
         />
-        <span className='custom-radio'></span>
+        <span className={props.error ? 'custom-radio error' : 'custom-radio'}></span>
         {props.label}
     </label>
     )
