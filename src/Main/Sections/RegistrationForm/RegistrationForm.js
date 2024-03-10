@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react'
 import './RegistrationForm.css'
 import TextInput from './TextInput/TextInput'
 import RadioInput from './RadioInput/RadioInput'
+import UploadImage from './UploadImage/UploadImage'
 import Button from '../../../components/Button'
+
 
 export default function RegistrationForm() {
 
     const [valueName, setValueName] = useState('')
     const [valueEmail, setValueEmail] = useState('')
     const [valuePhone, setValuePhone] = useState('')
+    const [imageName, setImageName] = useState('')
     const [selectedPosition, setSelectedPosition] = useState('')
-    const [errorTextInput, setErrorTextInput] = useState(false)
-    const [errorRadioInput, setErrorRadioInput] = useState(false)
+    const [isErrorTextInput, setErrorTextInput] = useState(false)
+    const [isErrorRadioInput, setErrorRadioInput] = useState(false)
+    const [isErrorUploadImage, setErrorUploadImage] = useState(false)
     const [disabledButton, setDisabledButton] = useState(false)
 
     const handleClick = (e) => {
@@ -24,13 +28,17 @@ export default function RegistrationForm() {
             setDisabledButton(true)
             setErrorRadioInput(true)
         }
+        if(imageName.length === 0){
+            setDisabledButton(true)
+            setErrorUploadImage(true)
+        }
     }
 
     useEffect(() => {
-        if(!errorTextInput && !errorRadioInput){
+        if(!isErrorTextInput && !isErrorRadioInput){
             setDisabledButton(false)
         }
-    }, [errorTextInput, errorRadioInput])
+    }, [isErrorTextInput, isErrorRadioInput])
     
     return (
     <section className='registration-form'>
@@ -46,6 +54,12 @@ export default function RegistrationForm() {
                 setSelectedPosition={setSelectedPosition}
                 error={disabledButton}
                 setErrorRadioInput={setErrorRadioInput}
+             />
+             <UploadImage 
+                imageName={imageName}
+                setImageName={setImageName}
+                error={disabledButton}
+                setErrorUploadImage={setErrorUploadImage}
              />
             <Button 
                 backgroundColor={disabledButton ? '#B4B4B4' : '#F4E041'} 
