@@ -11,7 +11,7 @@ export default function RegistrationForm() {
     const [valueName, setValueName] = useState('')
     const [valueEmail, setValueEmail] = useState('')
     const [valuePhone, setValuePhone] = useState('')
-    const [imageName, setImageName] = useState('')
+    const [uploadedFile, setUploadedFile] = useState(null)
     const [selectedPosition, setSelectedPosition] = useState('')
     const [isErrorTextInput, setErrorTextInput] = useState(false)
     const [isErrorRadioInput, setErrorRadioInput] = useState(false)
@@ -20,7 +20,7 @@ export default function RegistrationForm() {
 
     const handleClick = (e) => {
         e.preventDefault()
-        if(valueName.length < 2 || (valueEmail.length < 10 || !valueEmail.includes('@') || valueEmail.indexOf('@') + 6 > valueEmail.length || valueEmail.indexOf('@') === 0) || valuePhone.length < 13){
+        if(valueName.length < 2 || !/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) || valuePhone.length < 13){
             setDisabledButton(true)
             setErrorTextInput(true)
         }
@@ -28,17 +28,26 @@ export default function RegistrationForm() {
             setDisabledButton(true)
             setErrorRadioInput(true)
         }
-        if(imageName.length === 0){
+        if(!uploadedFile || uploadedFile.size > 5000000){
             setDisabledButton(true)
             setErrorUploadImage(true)
         }
     }
 
+    console.log(isErrorUploadImage)
+
     useEffect(() => {
-        if(!isErrorTextInput && !isErrorRadioInput){
+        if(!isErrorTextInput && !isErrorRadioInput && !isErrorUploadImage){
             setDisabledButton(false)
         }
-    }, [isErrorTextInput, isErrorRadioInput])
+    }, [isErrorTextInput, isErrorRadioInput, isErrorUploadImage])
+
+    const formData = new FormData()
+    formData.append('photo', uploadedFile)
+    formData.append('name', valueName)
+    formData.append('phone', valuePhone)
+    formData.append('email', valueEmail)
+    formData.append('position', selectedPosition)
     
     return (
     <section className='registration-form'>
@@ -56,9 +65,10 @@ export default function RegistrationForm() {
                 setErrorRadioInput={setErrorRadioInput}
              />
              <UploadImage 
-                imageName={imageName}
-                setImageName={setImageName}
-                error={disabledButton}
+                uploadedFile={uploadedFile}
+                setUploadedFile={setUploadedFile}
+                disabled={disabledButton}
+                error={isErrorUploadImage}
                 setErrorUploadImage={setErrorUploadImage}
              />
             <Button 

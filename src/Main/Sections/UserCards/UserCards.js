@@ -16,6 +16,7 @@ export default function UserCards() {
         fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=6`)
             .then(data => data.json())
             .then(data => {
+                console.log(data)
                 setUsers(prevUsers => [...prevUsers, ...data.users])
                 setTotalPage(data.total_pages)
             })

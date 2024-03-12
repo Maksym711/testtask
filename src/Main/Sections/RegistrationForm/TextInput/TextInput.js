@@ -18,7 +18,7 @@ export default function TextInput(props) {
             name='name'
             label='Your name'
             type='text'
-            maxLength={15} 
+            maxLength={60} 
             value={valueName}
             onChange={e => setValueName(e.target.value)}
             error={valueName.length < 2 ? error : undefined}
@@ -28,23 +28,17 @@ export default function TextInput(props) {
                     e.preventDefault()
                 }
             }}
-            helperText='min 2, max 15 characters'
+            helperText='min 2, max 60 characters'
         />
         <Input
             name='email'
             label='Email'
             type='email'
-            maxLength={35}
+            maxLength={100}
             value={valueEmail}
             onChange={e => setValueEmail(e.target.value)}
-            error={(valueEmail.length < 10 || !valueEmail.includes('@') || valueEmail.indexOf('@') + 6 > valueEmail.length || valueEmail.indexOf('@') === 0) ? error : undefined}
-            onKeyPress={e => {
-                const charCode = e.charCode;
-                if ((charCode >= 1024 && charCode <= 1157) || (charCode >= 1160 && charCode <= 1114) || charCode === 1105 || charCode === 39 || charCode === 96) {
-                    e.preventDefault();
-                }
-            }}
-            helperText='min 10, max 35 characters and special character "@"'
+            error={!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) ? error : undefined}
+            helperText='max 100 characters and special character "@"'
         />
         <Input
             name="phone"
