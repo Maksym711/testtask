@@ -22,7 +22,7 @@ export default function Button(props) {
 
     return (
         <button 
-            style={{backgroundColor: props.backgroundColor, color: props.color}} 
+            style={{backgroundColor: props.backgroundColor, color: props.color, margin: props.margin}} 
             className={classes.join(' ')}
             onClick={props.onClick}
             onMouseEnter={handleMouseEnter}

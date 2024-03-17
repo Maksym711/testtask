@@ -45,3 +45,27 @@
     margin: 21px 0 32px 0;
     text-align: center;
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .general-info {
+        width: 1024px;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 768px) {
+    .general-info {
+        width: 768px;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .general-info {
+        width: 360px;
+        height: 500px;
+    }
+
+    .content-general-info {
+        width: 328px;
+    }
+}

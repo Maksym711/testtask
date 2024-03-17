@@ -68,3 +68,9 @@
 .label.error {
     color: #CB3D40;
 }
+
+@media screen and (max-width: 360px) {
+    .input {
+        width: 328px;
+    }
+}

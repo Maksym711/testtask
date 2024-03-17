@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Nunito';
-  src: url('./font/Nunito-Regular.ttf') format('truetype');
+  src: url('./helper/font/Nunito-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 
@@ -44,4 +44,22 @@ img{vertical-align: top;}
 	  transition-duration: 0.01ms !important;
 	  scroll-behavior: auto !important;
 	}
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    html {
+        width: 1024px;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 768px) {
+    html {
+        width: 768px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    html {
+        width: 360px;
+    }
 }

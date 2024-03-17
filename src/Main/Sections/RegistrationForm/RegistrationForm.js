@@ -4,37 +4,91 @@ import TextInput from './TextInput/TextInput'
 import RadioInput from './RadioInput/RadioInput'
 import UploadImage from './UploadImage/UploadImage'
 import Button from '../../../components/Button'
+import Success from '../../../components/Success'
 
 
-export default function RegistrationForm() {
+export default function RegistrationForm(props) {
 
     const [valueName, setValueName] = useState('')
     const [valueEmail, setValueEmail] = useState('')
     const [valuePhone, setValuePhone] = useState('')
+    const [selectedPositionId, setSelectedPositionId] = useState(null)
     const [uploadedFile, setUploadedFile] = useState(null)
-    const [selectedPosition, setSelectedPosition] = useState('')
     const [isErrorTextInput, setErrorTextInput] = useState(false)
     const [isErrorRadioInput, setErrorRadioInput] = useState(false)
     const [isErrorUploadImage, setErrorUploadImage] = useState(false)
     const [disabledButton, setDisabledButton] = useState(false)
+    const [token, setToken] = useState('')
+    const [isSuccess, setIsSuccess] = useState(false)
+
+    useEffect(() => {
+        fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
+            .then(data => data.json())
+            .then(data => setToken(data.token))
+            .catch(error => alert(error))
+    }, [])
 
     const handleClick = (e) => {
         e.preventDefault()
-        if(valueName.length < 2 || !/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) || valuePhone.length < 13){
+        if(valueName.length < 2 || 
+            valueName.startsWith(' ') ||
+            valueName.startsWith('-') ||
+            /  |--/.test(valueName) ||
+            !/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) || 
+            valuePhone.length < 13)
+        {
             setDisabledButton(true)
             setErrorTextInput(true)
         }
-        if(selectedPosition.length === 0){
+        if(!selectedPositionId){
             setDisabledButton(true)
             setErrorRadioInput(true)
         }
-        if(!uploadedFile || uploadedFile.size > 5000000){
+        if(!uploadedFile || (uploadedFile && uploadedFile.size > 5000000)){
             setDisabledButton(true)
             setErrorUploadImage(true)
         }
-    }
+        if(valueName.length >= 2 && 
+            !valueName.startsWith(' ') &&
+            !valueName.startsWith('-') &&
+            !/  |--/.test(valueName) &&
+            /^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) && 
+            valuePhone.length === 13 && 
+            selectedPositionId && 
+            uploadedFile && 
+            (uploadedFile && uploadedFile.size <= 5000000))
+        {
+            fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', { 
+                method: 'POST', 
+                body: formData, 
+                headers: {'Token': token}
+            }) 
+                .then(() => { 
+                    setIsSuccess(true)
+                    setTimeout(() => {
+                        setIsSuccess(false)
+                    }, 3000)
 
-    console.log(isErrorUploadImage)
+                    if(props.page === 1){
+                        fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6`)
+                            .then(data => data.json())
+                            .then(data => {
+                                props.setUsers(data.users)
+                            })
+                            .catch(error => alert(error))
+                    }else{
+                        props.setUsers([])
+                        props.setPage(1)
+                    }
+                        document.getElementById('user-cards').scrollIntoView({ behavior: 'smooth' })
+                        setValueName('')
+                        setValueEmail('')
+                        setValuePhone('')
+                        setUploadedFile(null)
+                })
+                .catch(error => alert(error))
+            }
+    }
 
     useEffect(() => {
         if(!isErrorTextInput && !isErrorRadioInput && !isErrorUploadImage){
@@ -43,14 +97,14 @@ export default function RegistrationForm() {
     }, [isErrorTextInput, isErrorRadioInput, isErrorUploadImage])
 
     const formData = new FormData()
-    formData.append('photo', uploadedFile)
     formData.append('name', valueName)
-    formData.append('phone', valuePhone)
     formData.append('email', valueEmail)
-    formData.append('position', selectedPosition)
+    formData.append('phone', valuePhone)
+    formData.append('position_id', selectedPositionId)
+    formData.append('photo', uploadedFile)
     
     return (
-    <section className='registration-form'>
+    <section id='registration-form'>
         <h1>Working with POST request</h1>
         <form>
             <TextInput 
@@ -59,8 +113,7 @@ export default function RegistrationForm() {
                 setValues={{ setValueName, setValueEmail, setValuePhone, setErrorTextInput }}
             />
             <RadioInput 
-                selectedPosition={selectedPosition}
-                setSelectedPosition={setSelectedPosition}
+                setSelectedPositionId={setSelectedPositionId}
                 error={disabledButton}
                 setErrorRadioInput={setErrorRadioInput}
              />
@@ -73,7 +126,8 @@ export default function RegistrationForm() {
              />
             <Button 
                 backgroundColor={disabledButton ? '#B4B4B4' : '#F4E041'} 
-                backgroundHover={disabledButton ? undefined : '#FFE302'} 
+                backgroundHover={disabledButton ? undefined : '#FFE302'}
+                margin='auto'
                 color={disabledButton ? '#FFFFFF' : 'black'} 
                 small 
                 onClick={handleClick}
@@ -81,6 +135,7 @@ export default function RegistrationForm() {
                 Sign up
             </Button>
         </form>
+        {isSuccess && <Success />}
     </section>
     )
 }

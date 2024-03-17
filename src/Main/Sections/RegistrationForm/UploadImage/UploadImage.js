@@ -10,15 +10,26 @@ export default function UploadImage(props) {
     }
 
     const handleFileSelection = (e) => {
-        const file = e.target.files[0]
-        const fileExtension = file.type.split('/').pop().toLowerCase()
-
-        if(fileExtension === 'jpeg' || fileExtension === 'jpg'){
-            console.log(e.target.files[0])
-            props.setUploadedFile(e.target.files[0])
-        }
-        else {
-            props.setUploadedFile(null)
+        const file = e.target.files[0];
+        if (file) {
+            const fileExtension = file.type.split('/').pop().toLowerCase();
+            if (fileExtension === 'jpeg' || fileExtension === 'jpg') {
+                const img = new Image();
+                img.onload = function() {
+                    const imgWidth = this.width;
+                    const imgHeight = this.height;
+                    if (imgWidth >= 70 && imgHeight >= 70) {
+                        props.setUploadedFile(file)
+                    } 
+                    else {
+                        props.setUploadedFile(null)
+                    }
+                };
+                img.src = URL.createObjectURL(file)
+            } 
+            else {
+                props.setUploadedFile(null)
+            }
         }
     }
 
@@ -42,7 +53,7 @@ export default function UploadImage(props) {
                 onChange={handleFileSelection}     
             />
         </div>
-        {props.error && <p className='error-text'>minimum size of photo 70x70px, the photo size max 5 Mb</p>}   
+        <p className={props.error ? 'file-helper-text error' : 'file-helper-text'}>minimum size of photo 70x70px, the photo size max 5 Mb</p> 
     </div>
     )
 }

@@ -1,0 +1,20 @@
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    main {
+        max-width: 1024px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 768px) {
+    main {
+        max-width: 768px;
+        width: 1005px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    main {
+        max-width: 360px;
+        width: 100%;
+    }
+}

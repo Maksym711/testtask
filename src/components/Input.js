@@ -37,7 +37,7 @@ export default function Input(props) {
             maxLength={props.maxLength}
             onKeyPress={props.onKeyPress}
         />
-        <p className={props.error ? 'helper-text error' : 'helper-text'}>{props.helperText}</p>
+        <p className={props.error ? 'helper-text error' : 'helper-text'}>{props.error ? props.errorText : props.helperText}</p>
     </div>
     )
 }

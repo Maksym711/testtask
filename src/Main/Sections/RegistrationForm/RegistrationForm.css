@@ -1,9 +1,10 @@
-.registration-form {
+#registration-form {
     width: 1170px;
     margin: 0 auto 100px auto;
 }
 
-.registration-form h1 {
+
+#registration-form h1 {
     text-align: center;
     line-height: 40px;
     font-size: 40px;
@@ -11,7 +12,7 @@
     color: #000000;
 }
 
-.registration-form form {
+#registration-form form {
     width: 380px;
     margin: 50px auto;
 }
@@ -23,17 +24,28 @@
     gap: 50px;
 }
 
-/* .radio-block {
-    display: flex;
-    gap: 7px;
-    flex-direction: column;
-    margin: 25px 0 47px 0;
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #registration-form {
+        width: 904px;
+        margin: 0 auto 100px auto;
+    }
 }
 
-.radio-block h4 {
-    font-weight: 400;
-    line-height: 26px;
-    font-size: 16px;
-    margin-bottom: 4px;
-} */
+@media screen and (min-width: 361px) and (max-width: 768px) {
+    #registration-form {
+        width: 704px;
+        margin: 0 auto 100px auto;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    #registration-form {
+        width: 328px;
+        margin: 0 auto 100px auto;
+    }
+
+    #registration-form form {
+        width: 328px;
+    }
+}
 

@@ -2,10 +2,6 @@
     margin: 50px 0;
 }
 
-.upload-block.error {
-    margin: 50px 0 32px 0;
-}
-
 .upload-image{
     display: flex;
     width: 380px;
@@ -68,10 +64,24 @@
     cursor: pointer;
 }
 
-.error-text {
+.file-helper-text {
+    line-height: 14px;
+    font-size: 12px;
+    color: #7E7E7E;
+    margin-top: 4px;
+    margin-left: 16px;
+}
+
+.file-helper-text.error {
     line-height: 14px;
     font-size: 12px;
     color: #CB3D40;
     margin-top: 4px;
     margin-left: 16px;
+}
+
+@media screen and (max-width: 360px) {
+    .upload-image{
+        width: 328px;
+    }
 }
