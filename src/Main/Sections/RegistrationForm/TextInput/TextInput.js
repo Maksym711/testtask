@@ -18,8 +18,18 @@ export default function TextInput(props) {
             !(
                 (charCode >= 65 && charCode <= 90) ||
                 (charCode >= 97 && charCode <= 122) ||
-                // (charCode >= 1040 && charCode <= 1103) ||
-                charCode === 32 || charCode === 45 || charCode === 39
+                (charCode >= 1040 && charCode <= 1103) ||
+                charCode === 1025 ||
+                charCode === 1105 ||
+                charCode === 1110 ||
+                charCode === 1030 ||
+                charCode === 1111 ||
+                charCode === 1031 ||
+                charCode === 1108 ||
+                charCode === 1028 ||
+                charCode === 32 ||
+                charCode === 45 ||
+                charCode === 39
             )
         ) {
             e.preventDefault()
@@ -53,7 +63,13 @@ export default function TextInput(props) {
             maxLength={60} 
             value={valueName}
             onChange={e => setValueName(e.target.value)}
-            error={(valueName.startsWith(' ') || valueName.startsWith('-') || valueName.length < 2 || /  |--/.test(valueName)) ? error : undefined}
+            error={(
+                valueName.startsWith(' ') || 
+                valueName.startsWith('-') || 
+                valueName.startsWith('\'') ||
+                valueName.length < 2 || 
+                /  |--|''/.test(valueName)
+            ) ? error : undefined}
             onKeyPress={nameOnKeyPress}
             helperText='min 2, max 60 characters'
             errorText='please, enter correct name (min 2, max 60 characters)'

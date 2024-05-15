@@ -1,5 +1,6 @@
 #registration-form {
-    width: 1170px;
+    max-width: 1170px;
+    width: 100%;
     margin: 0 auto 100px auto;
 }
 
@@ -26,22 +27,19 @@
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     #registration-form {
-        width: 904px;
-        margin: 0 auto 100px auto;
+        max-width: 904px;
     }
 }
 
 @media screen and (min-width: 361px) and (max-width: 768px) {
     #registration-form {
-        width: 704px;
-        margin: 0 auto 100px auto;
+        max-width: 704px;
     }
 }
 
 @media screen and (max-width: 360px) {
     #registration-form {
-        width: 328px;
-        margin: 0 auto 100px auto;
+        max-width: 328px;
     }
 
     #registration-form form {

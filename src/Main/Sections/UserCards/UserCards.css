@@ -1,5 +1,6 @@
 #user-cards {
-    width: 1170px;
+    max-width: 1170px;
+    width: 100%;
     margin: 140px auto;
     text-align: center;
 }
@@ -22,8 +23,7 @@
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     #user-cards {
-        width: 904px;
-        margin: 140px auto;
+        max-width: 904px;
     }
 
     .content-user-cards {
@@ -34,8 +34,7 @@
 
 @media screen and (min-width: 361px) and (max-width: 768px) {
     #user-cards {
-        width: 704px;
-        margin: 140px auto;
+        max-width: 704px;
     }
 
     .content-user-cards {
@@ -46,8 +45,7 @@
 
 @media screen and (max-width: 360px) {
     #user-cards {
-        width: 328px;
-        margin: 140px auto;
+        max-width: 328px;
     }
 
     .content-user-cards {

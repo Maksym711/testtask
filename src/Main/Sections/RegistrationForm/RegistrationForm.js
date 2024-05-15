@@ -33,7 +33,8 @@ export default function RegistrationForm(props) {
         if(valueName.length < 2 || 
             valueName.startsWith(' ') ||
             valueName.startsWith('-') ||
-            /  |--/.test(valueName) ||
+            valueName.startsWith('\'') ||
+            /  |--|''/.test(valueName) ||
             !/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(valueEmail) || 
             valuePhone.length < 13)
         {
